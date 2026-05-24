@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const cli = path.join(root, 'src', 'cli.js');
+const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'api-contract-diff-'));
+const oldFile = path.join(tmp, 'old.json');
+const newFile = path.join(tmp, 'new.json');
+fs.writeFileSync(oldFile, JSON.stringify({ paths: { '/users': { get: { responses: { 200: { schema: { id: 1 } } } } } } }));
+fs.writeFileSync(newFile, JSON.stringify({ paths: { '/users': { post: {} } } }));
+const out = execFileSync(process.execPath, [cli, oldFile, newFile], { encoding: 'utf8' });
+assert.match(out, /removed-operation/);
+const json = JSON.parse(execFileSync(process.execPath, [cli, oldFile, newFile, '--json'], { encoding: 'utf8' }));
+assert.ok(json.summary.breaking > 0);
+console.log('api-contract-diff tests passed');

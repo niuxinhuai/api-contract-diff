@@ -1,0 +1,36 @@
+{
+  "name": "api-contract-diff",
+  "version": "0.1.0",
+  "description": "Compare OpenAPI, Swagger, GraphQL-ish JSON, or generic JSON contract files for breaking shape changes.",
+  "type": "module",
+  "bin": {
+    "api-contract-diff": "./src/cli.js"
+  },
+  "scripts": {
+    "test": "node test/run-tests.js"
+  },
+  "keywords": [
+    "cli",
+    "developer-tools",
+    "open-source",
+    "ai-workflow"
+  ],
+  "author": "niuxinhuai",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niuxinhuai/api-contract-diff.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niuxinhuai/api-contract-diff/issues"
+  },
+  "homepage": "https://github.com/niuxinhuai/api-contract-diff#readme",
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}
