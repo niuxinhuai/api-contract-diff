@@ -1,0 +1,6 @@
+{
+  "ignore": [
+    "$.info.version",
+    "$.servers"
+  ]
+}
